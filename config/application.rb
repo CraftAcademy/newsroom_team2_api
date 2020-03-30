@@ -29,13 +29,14 @@ module NewsroomTeam2Api
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        resource '*', 
-          headers: :any, 
+        resource '*',
+          headers: :any,
           methods: %i[get post put delete],
           expose: %w(access-token expiry token-type uid client),
           max_age: 0
       end
     end
+    config.stripe.publishable_key = Rails.application.credentials.stripe[:publishable_key]
+    config.stripe.secret_key = Rails.application.credentials.stripe[:secret_key]
   end
 end
-
